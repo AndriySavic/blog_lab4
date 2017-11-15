@@ -1,24 +1,16 @@
-<style type="text/css">
-	.font1 {
-		font: 12pt;
-	}
-	.font2 {
-		font: 16pt sans-serif;
-	}
-</style>
-
-<button type="button" class="btn">
-<%= link_to "Create new post", new_post_path %>
-</button>
-<div>
+<center><%= link_to "Create new post", new_post_path, class: "btn btn-info" %>
+<div class="posts">
 <% @posts.each do |post| %><br />
 <hr>
-<h1><%= link_to post.title, post_path(post.id) %></h1>
-<p><%= image_tag post.user.avatar.url, width: 50, heigth:50 %>
 
-<p class="font2"><%= post.body %></p>
-<p class="font1"> Author : <%= post.user.nickname %></p>
-<p class="font1">Created at : <%= post.user.created_at %></p>
+
+<h1><%= link_to post.title, post_path(post.id)%></h1>
+<p>
+	<%= image_tag post.user.avatar.url(:thumb), width: 50, height: 50 %>
+	Author: <%= post.user.nickname%>  |   
+    Create at: <%= post.created_at%>
+</p>
+<p><%= post.body %></p>
 <% if current_user != nil and current_user.id == post.user_id %>
 <p><%= link_to "Edit", edit_post_path(post.id) %>
  or 
@@ -26,4 +18,4 @@
 <% end %>
 <% end %>
 </div>
-
+</center>
